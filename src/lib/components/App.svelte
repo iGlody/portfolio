@@ -5,7 +5,7 @@
 	import { OrbitControls } from '@threlte/extras';
 	import { TextureLoader, Vector3, BufferGeometry } from 'three';
 
-	import track from '$lib/audio/track.mp3';
+	import track from '$lib/audio/Halcyon.mp3';
 	import { Canvas } from '@threlte/core';
 
 	import { Align, Environment, Float, Text3DGeometry, Stars } from '@threlte/extras';
@@ -30,8 +30,8 @@
 
 	// Variables for updating points
 	let vxFactor1 = 0.8;
-	let vxFactor2 = 0.9;
-	let vxMultiplier = 10;
+	let vxFactor2 = 1;
+	let vxMultiplier = 12;
 	let vxRandomFactor = 0.1;
 	let vyFactor1 = 0.8;
 	let vyFactor2 = 0.3;
@@ -39,7 +39,18 @@
 	let vyRandomFactor = 0.1;
 	let vzRandomFactor = 0.01;
 
-	const size = 22;
+	// Point size control
+	let basePointSize = 0.25;
+	let dynamicPointSize = basePointSize;
+
+	// Camera control
+	let baseCameraDistance = 8;
+	let dynamicCameraDistance = baseCameraDistance;
+	let cameraRef;
+	let controlsRef;
+	let lowZoomFactor = 2.0; // How much low frequencies affect zoom
+
+	const size = 20;
 	const count = size ** 3;
 
 	const vectorPositions: Vector3[] = [];
@@ -86,17 +97,16 @@
 			let z = i % size;
 
 			const vx =
-				Math.sin(Math.abs(size - x + (Volume / 1) * Low * 3) * vxFactor1) *
+				Math.sin(Math.abs(size - x + (Volume / 1) * Low * 1.2) * vxFactor1) *
 					Math.sin(Math.abs(size - y) * vxFactor2) *
 					vxMultiplier +
 				Math.random() * vxRandomFactor;
 
 			const vy =
-				Math.sin(Math.abs(size - x + Volume * High) * vyFactor1) *
+				Math.sin(Math.abs(size - x + Volume * Mid) * vyFactor1) *
 					Math.sin(Math.abs(size - y) * vyFactor2) *
 					vyMultiplier +
-				Math.random() * vyRandomFactor +
-				High;
+				Math.random() * vyRandomFactor;
 
 			const vz = y + Math.random() * vzRandomFactor * z;
 			newVectorPositions.push(new Vector3(vx, vy, vz));
@@ -146,6 +156,26 @@
 
 				console.log(low, mid, high, volume);
 
+				// Update point size based on audio data
+				// You can adjust these factors to control how different frequencies affect point size
+				const lowSizeFactor = 0.2; // How much low frequencies affect size
+				const midSizeFactor = 0.3; // How much mid frequencies affect size
+				const highSizeFactor = 0.5; // How much high frequencies affect size
+				const volumeSizeFactor = 0.2; // Overall volume influence
+
+				// Optional: Clamp size to reasonable limits
+				dynamicPointSize = Math.max(0.1, Math.min(1.5, dynamicPointSize));
+
+				// Update camera distance based on low frequencies
+				dynamicCameraDistance = baseCameraDistance - Low * lowZoomFactor;
+				dynamicCameraDistance = Math.max(4, Math.min(12, dynamicCameraDistance));
+
+				// Update camera position if reference exists
+				if (cameraRef) {
+					const direction = cameraRef.position.clone().normalize();
+					cameraRef.position.copy(direction.multiplyScalar(dynamicCameraDistance));
+				}
+
 				requestAnimationFrame(analyze);
 			}
 		}
@@ -162,6 +192,29 @@
 			volume = getVolume();
 
 			console.log(low, mid, high, volume);
+
+			// Update point size based on audio data
+			// You can adjust these factors to control how different frequencies affect point size
+			const lowSizeFactor = 0.000001; // How much low frequencies affect size
+			const midSizeFactor = 0.2; // How much mid frequencies affect size
+			const highSizeFactor = 0.4; // How much high frequencies affect size
+			const volumeSizeFactor = 0.2; // Overall volume influence
+
+			// Calculate new point size
+			dynamicPointSize = basePointSize + low * lowSizeFactor;
+
+			// Optional: Clamp size to reasonable limits
+			dynamicPointSize = Math.max(0.1, Math.min(2, dynamicPointSize));
+
+			// Update camera distance based on low frequencies
+			dynamicCameraDistance = baseCameraDistance - low * lowZoomFactor;
+			dynamicCameraDistance = Math.max(4, Math.min(12, dynamicCameraDistance));
+
+			// Update camera position if reference exists
+			if (cameraRef) {
+				const direction = cameraRef.position.clone().normalize();
+				cameraRef.position.copy(direction.multiplyScalar(dynamicCameraDistance));
+			}
 
 			requestAnimationFrame(analyze);
 		}
@@ -197,14 +250,16 @@
 	<Canvas>
 		<T.DirectionalLight position={[0, 0, 0]} intensity={1} />
 
-		<T.PerspectiveCamera
-			makeDefault
-			position.y={1}
-			position.z={8}
-			fov={90}
-			on:create={({ ref }) => ref.lookAt(0, 0, 0)}
-		>
-			<OrbitControls enableDamping enablePan={false} enableZoom={false} autoRotate />
+		<T.PerspectiveCamera makeDefault position.y={1} position.z={baseCameraDistance} fov={90}>
+			<OrbitControls
+				enableDamping
+				enablePan={true}
+				enableZoom={true}
+				autoRotate
+				on:create={({ ref }) => {
+					controlsRef = ref;
+				}}
+			/>
 			<AudioListener />
 		</T.PerspectiveCamera>
 
@@ -213,26 +268,17 @@
 		<Align>
 			<T.Points>
 				<T is={pointsBufferGeometry} />
-				<T.PointsMaterial size={0.25} />
+				<T.PointsMaterial size={dynamicPointSize} />
 			</T.Points>
 		</Align>
 	</Canvas>
 </div>
 
 <div class="flex justify-between w-full">
-	<div class="audio-container z-40 mx-auto bg-[#0d1320] p-6">
+	<div class="audio-container z-40 mx-auto">
 		<div class="w-full flex flex-col gap-2">
-			<div class="font-bold w-full text-white">
-				<!-- svelte-ignore a11y-missing-content -->
-				<a
-					href="https://soundcloud.com/l70ka5/physical-form?si=51e1a15f21bd409bb8facf382af472c2&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing"
-					target="_blank"
-				>
-					L70KA5 - Physical Form
-				</a>
-			</div>
 			<audio bind:this={audioElement} controls autoplay loop>
-				<source src={track} type="audio/mp3" class="w-72" />
+				<source src={track} type="audio/mp3" />
 				Your browser does not support the audio element.
 			</audio>
 		</div>
