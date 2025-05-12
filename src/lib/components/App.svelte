@@ -45,10 +45,16 @@
 
 	// Camera control
 	let baseCameraDistance = 8;
-	let dynamicCameraDistance = baseCameraDistance;
+	let cameraZoom = 0; // We'll use this to control the camera's zoom
+	let lowZoomFactor = 20; // Increased for more noticeable effect on kicks
 	let cameraRef;
 	let controlsRef;
-	let lowZoomFactor = 2.0; // How much low frequencies affect zoom
+
+	// Kick detection
+	let prevLow = 0;
+	let lowThreshold = 0.1; // Threshold for detecting significant changes in low frequencies
+	let kickDecay = 0.85; // How quickly the zoom effect fades after a kick (lower = faster)
+	let kickBoost = 0.3; // Additional zoom boost when a kick is detected
 
 	const size = 20;
 	const count = size ** 3;
@@ -91,6 +97,35 @@
 		const High = Math.log10(normalizeHigh);
 		const Volume = Math.log10(normalizeVolume);
 
+		// Update point size based on audio data
+		const lowSizeFactor = 0.000001; // How much low frequencies affect size
+		const midSizeFactor = 0.2; // How much mid frequencies affect size
+		const highSizeFactor = 0.4; // How much high frequencies affect size
+
+		// Calculate new point size
+		dynamicPointSize = basePointSize + low * lowSizeFactor;
+		dynamicPointSize = Math.max(0.3, Math.min(2, dynamicPointSize));
+
+		// Update camera zoom based on Low variable with kick detection
+		// Calculate the change in low frequency from the previous frame
+		const lowDelta = Low - prevLow;
+		prevLow = Low;
+
+		// Detect kick drum hits (sudden increases in low frequencies)
+		let kickDetected = lowDelta > lowThreshold;
+
+		// Apply zoom effect with extra boost for kicks
+		if (kickDetected) {
+			// Apply an immediate boost when a kick is detected
+			cameraZoom = 1.0 + Low * lowZoomFactor + kickBoost;
+		} else {
+			// Decay the current zoom effect to create a "bounce back" effect
+			cameraZoom = 1.0 + Low * lowZoomFactor + (cameraZoom - 1.0) * kickDecay;
+		}
+
+		// Ensure zoom stays within reasonable bounds
+		cameraZoom = Math.max(0.8, Math.min(2.0, cameraZoom));
+
 		for (let i = 0; i < count; i++) {
 			let x = i / (size * size);
 			let y = (i / size) % size;
@@ -112,11 +147,6 @@
 			newVectorPositions.push(new Vector3(vx, vy, vz));
 		}
 		pointsBufferGeometry.setFromPoints(newVectorPositions);
-	}
-
-	// Update properties of points over time
-	function updatePointsProperties() {
-		vxFactor2 += 0.001;
 	}
 
 	// Utility to calculate average intensity in a frequency range
@@ -144,41 +174,8 @@
 	}
 
 	function startAnalysis() {
-		function analyze() {
-			if (analyser) {
-				analyser.getByteFrequencyData(frequencyData);
-
-				// Calculate frequency ranges
-				low = getFrequencyRange(20, 250);
-				mid = getFrequencyRange(250, 2000);
-				high = getFrequencyRange(2000, 20000);
-				volume = getVolume();
-
-				console.log(low, mid, high, volume);
-
-				// Update point size based on audio data
-				// You can adjust these factors to control how different frequencies affect point size
-				const lowSizeFactor = 0.2; // How much low frequencies affect size
-				const midSizeFactor = 0.3; // How much mid frequencies affect size
-				const highSizeFactor = 0.5; // How much high frequencies affect size
-				const volumeSizeFactor = 0.2; // Overall volume influence
-
-				// Optional: Clamp size to reasonable limits
-				dynamicPointSize = Math.max(0.1, Math.min(1.5, dynamicPointSize));
-
-				// Update camera distance based on low frequencies
-				dynamicCameraDistance = baseCameraDistance - Low * lowZoomFactor;
-				dynamicCameraDistance = Math.max(4, Math.min(12, dynamicCameraDistance));
-
-				// Update camera position if reference exists
-				if (cameraRef) {
-					const direction = cameraRef.position.clone().normalize();
-					cameraRef.position.copy(direction.multiplyScalar(dynamicCameraDistance));
-				}
-
-				requestAnimationFrame(analyze);
-			}
-		}
+		// Start analyzing the audio
+		analyze();
 	}
 
 	function analyze() {
@@ -192,29 +189,6 @@
 			volume = getVolume();
 
 			console.log(low, mid, high, volume);
-
-			// Update point size based on audio data
-			// You can adjust these factors to control how different frequencies affect point size
-			const lowSizeFactor = 0.000001; // How much low frequencies affect size
-			const midSizeFactor = 0.2; // How much mid frequencies affect size
-			const highSizeFactor = 0.4; // How much high frequencies affect size
-			const volumeSizeFactor = 0.2; // Overall volume influence
-
-			// Calculate new point size
-			dynamicPointSize = basePointSize + low * lowSizeFactor;
-
-			// Optional: Clamp size to reasonable limits
-			dynamicPointSize = Math.max(0.1, Math.min(2, dynamicPointSize));
-
-			// Update camera distance based on low frequencies
-			dynamicCameraDistance = baseCameraDistance - low * lowZoomFactor;
-			dynamicCameraDistance = Math.max(4, Math.min(12, dynamicCameraDistance));
-
-			// Update camera position if reference exists
-			if (cameraRef) {
-				const direction = cameraRef.position.clone().normalize();
-				cameraRef.position.copy(direction.multiplyScalar(dynamicCameraDistance));
-			}
 
 			requestAnimationFrame(analyze);
 		}
@@ -237,11 +211,9 @@
 			// Start analyzing the audio
 			startAnalysis();
 		}
-		const interval1 = setInterval(analyze, 32);
-		const interval2 = setInterval(updatePointsGeometry, 32);
+		const interval1 = setInterval(updatePointsGeometry, 32);
 		return () => {
 			clearInterval(interval1);
-			clearInterval(interval2);
 		};
 	});
 </script>
@@ -250,15 +222,20 @@
 	<Canvas>
 		<T.DirectionalLight position={[0, 0, 0]} intensity={1} />
 
-		<T.PerspectiveCamera makeDefault position.y={1} position.z={baseCameraDistance} fov={90}>
+		<T.PerspectiveCamera
+			makeDefault
+			position.y={1}
+			position.z={baseCameraDistance}
+			fov={90}
+			zoom={cameraZoom}
+		>
 			<OrbitControls
 				enableDamping
+				dampingFactor={0.1}
 				enablePan={true}
 				enableZoom={true}
 				autoRotate
-				on:create={({ ref }) => {
-					controlsRef = ref;
-				}}
+				autoRotateSpeed={2}
 			/>
 			<AudioListener />
 		</T.PerspectiveCamera>
