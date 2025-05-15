@@ -252,15 +252,15 @@
 </div>
 
 <div class="flex justify-between w-full">
-	<div class="audio-container z-40 mx-auto">
+	<div class="audio-container w-full z-40">
 		<div class="w-full flex flex-col gap-2">
-			<audio bind:this={audioElement} controls autoplay loop>
+			<audio bind:this={audioElement} class="w-full" controls autoplay loop>
 				<source src={track} type="audio/mp3" />
 				Your browser does not support the audio element.
 			</audio>
 		</div>
 	</div>
-	<div class="z-50 audio-stats grid grid-cols-1 gap-2">
+	<div class="hidden z-50 audio-stats grid grid-cols-1 gap-2">
 		<p><strong>Low:</strong> {low.toFixed(2)}</p>
 		<p><strong>Mid:</strong> {mid.toFixed(2)}</p>
 		<p><strong>High:</strong> {high.toFixed(2)}</p>
@@ -273,7 +273,6 @@
 		display: fixed;
 		flex-direction: column;
 		align-items: center;
-		margin: 1rem;
 	}
 
 	.audio-stats {
