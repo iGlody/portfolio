@@ -6,6 +6,32 @@
 	import { TextureLoader, Vector3, BufferGeometry } from 'three';
 
 	import track from '$lib/audio/Halcyon.mp3';
+
+	// Track information for server logging
+	const trackInfo = {
+		title: 'Halcyon',
+		artist: 'Audio Units',
+		album: 'Chakravyūh',
+		label: 'Qilla Records India',
+		duration: '06:10',
+		currentTime: '00:01'
+	};
+
+	// Function to send track info to server for ASCII logging
+	async function logTrackInfoToServer(currentTimeStr?: string) {
+		try {
+			const infoToSend = { ...trackInfo, currentTime: currentTimeStr || '00:01' };
+			await fetch('/api/track-info', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(infoToSend)
+			});
+		} catch (error) {
+			console.error('Failed to log track info to server:', error);
+		}
+	}
 	import { Canvas } from '@threlte/core';
 
 	import { Align, Environment, Float, Text3DGeometry, Stars } from '@threlte/extras';
@@ -16,7 +42,7 @@
 	let isPlaying = false; // Track the playback state
 	let coverOpen = false; // Simulate a cover open/close state for interaction
 
-	let audioElement; // Reference to the audio element
+	let audioElement: HTMLAudioElement; // Reference to the audio element
 	let analyser, frequencyData;
 	let low = 0,
 		mid = 0,
@@ -210,6 +236,18 @@
 
 			// Start analyzing the audio
 			startAnalysis();
+
+			// Log track info to server on initial load
+			logTrackInfoToServer('00:01');
+
+			// Set up time update listener for track progress
+			audioElement.addEventListener('timeupdate', () => {
+				// Only log to server every 30 seconds to avoid spamming
+				if (Math.floor(audioElement.currentTime) % 30 === 0 && audioElement.currentTime > 1) {
+					const currentTime = new Date(audioElement.currentTime * 1000).toISOString().substr(14, 5);
+					logTrackInfoToServer(currentTime);
+				}
+			});
 		}
 		const interval1 = setInterval(updatePointsGeometry, 32);
 		return () => {
@@ -251,7 +289,7 @@
 	</Canvas>
 </div>
 
-<div class="flex justify-between w-full">
+<div class="flex justify-between w-full hiddenč">
 	<div class="audio-container w-full z-40">
 		<div class="w-full flex flex-col gap-2">
 			<audio bind:this={audioElement} class="w-full" controls autoplay loop>
