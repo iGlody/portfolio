@@ -14,9 +14,22 @@
 			Student of Creative Technology at the UT Twente, interested in connecting creativity with
 			technology in forms of music and art.
 		</p>
-		<p class="text-sm opacity-75 max-w-md text-end">
-			100% curious <br /> 100% passionate <br /> 100% critical
-		</p>
+		<div class="flex justify-end">
+			<table class="text-sm opacity-75 max-w-sm">
+				<tr>
+					<td class="text-end">60%</td>
+					<td>Curious</td>
+				</tr>
+				<tr>
+					<td class="text-end">30%</td>
+					<td>Passionate</td>
+				</tr>
+				<tr>
+					<td class="text-end">10%</td>
+					<td>Critical</td>
+				</tr>
+			</table>
+		</div>
 	</div>
 </section>
 
@@ -70,8 +83,9 @@
 			</p>
 			<div class="text-sm opacity-75">
 				<span class="inline-block bg-white/10 px-3 py-1 mr-2">Svelte</span>
-				<span class="inline-block bg-white/10 px-3 py-1 mr-2">Threlte</span>
-				<span class="inline-block bg-white/10 px-3 py-1">Three.js</span>
+				<span class="inline-block bg-white/10 px-3 py-1 mr-2">TypeScript</span>
+				<span class="inline-block bg-white/10 px-3 py-1 mr-2">Reddit API</span>
+				<span class="inline-block bg-white/10 px-3 py-1">SEO</span>
 			</div>
 		</div>
 	</div>
@@ -87,8 +101,8 @@
 			<h3 class="text-lg font-semibold">Ancore</h3>
 			<a href="https://www.ancoreai.com/" target="_blank">ancore.app</a>
 			<p class="text-sm opacity-75">
-				Prepare your digital presence for the AI revolution. Optimize your website to communicate
-				effectively with AI agents and stay ahead in the age of artificial intelligence.
+				Optimize your website to communicate effectively with AI agents and stay ahead in the age of
+				artificial intelligence.
 			</p>
 			<div class="flex flex-wrap gap-1">
 				<span class="text-xs bg-white/10 px-2 py-1">Svelte</span>
