@@ -10,7 +10,7 @@
 			<a href="#experience">Experience</a>
 			<a href="#contact">Contact</a>
 		</div>
-		<div class="flex gap-4">
+		<div class="hidden gap-4 md:flex">
 			<a href="https://github.com/iGlody" target="_blank">GitHub</a>
 			<a href="https://www.linkedin.com/in/ilukaspesek/" target="_blank">LinkedIn</a>
 			<a href="https://soundcloud.com/l70ka5" target="_blank">SoundCloud</a>

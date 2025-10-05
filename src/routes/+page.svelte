@@ -238,7 +238,7 @@
 			<p class="opacity-75 mb-2">
 				<a href="https://www.myepico.com/" target="_blank">GoOut s.r.o.</a> • Nov 2020 - Jan 2021
 			</p>
-			<ul>
+			<ul class="list-disc pl-6">
 				<li>Developed PHP parsers to fetch and process data from various venue websites.</li>
 				<li>Worked with MySQL for efficient data storage and retrieval.</li>
 				<li>Utilized JavaScript to enhance data processing and automation.</li>
@@ -266,7 +266,7 @@
 				target="_blank"
 				class="border border-white/20 hover:border-white/40 px-6 py-3 transition-colors"
 			>
-				LinkedIn Profile
+				LinkedIn
 			</a>
 		</div>
 	</div>
