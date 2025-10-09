@@ -185,7 +185,7 @@
 					applications.
 				</li>
 				<li>
-					Cummunitaing with business partners and clients to ensure alignment with project goals.
+					Communicating with business partners and clients to ensure alignment with project goals.
 				</li>
 			</ul>
 		</div>
