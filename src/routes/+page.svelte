@@ -17,11 +17,11 @@
 		<div class="flex justify-end">
 			<table class="text-sm opacity-75 max-w-sm">
 				<tr>
-					<td class="text-end">60%</td>
+					<td class="text-end">70%</td>
 					<td>Curious</td>
 				</tr>
 				<tr>
-					<td class="text-end">30%</td>
+					<td class="text-end">20%</td>
 					<td>Passionate</td>
 				</tr>
 				<tr>

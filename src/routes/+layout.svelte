@@ -1,5 +1,12 @@
 <script>
 	import '../app.css';
+	import { inject } from '@vercel/analytics';
+	import { dev } from '$app/environment';
+	import { onMount } from 'svelte';
+
+	onMount(() => {
+		inject({ mode: dev ? 'development' : 'production' });
+	});
 </script>
 
 <div class="fixed top-0 left-0 w-full h-8 text-white backdrop-blur-xl p-2">
