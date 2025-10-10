@@ -9,10 +9,10 @@
 	</div>
 	<div class="flex flex-col justify-center space-y-4">
 		<h1>Lukáš Pešek</h1>
-		<p class="text-xl opacity-90">Creative Technologist</p>
+		<p class="text-xl opacity-90">Full Stack Developer + Creative Technologist</p>
 		<p class="text-lg opacity-75 max-w-md">
-			Student of Creative Technology at the UT Twente, interested in connecting creativity with
-			technology in forms of music and art.
+			Building Full stack web aplications and creative solutions for the web with over 5 years of
+			experience.
 		</p>
 		<div class="flex justify-end">
 			<table class="text-sm opacity-75 max-w-sm">
@@ -45,13 +45,15 @@
 				<h3>role: Founder + Frontend Developer</h3>
 				<h3>link: <a href="https://roomloop.eu/" target="_blank">roomloop.eu</a></h3>
 			</div>
-			<p>
-				Addressing housing challenges through innovative technology solutions and digital platforms.
-			</p>
+			<ul class="list-disc pl-6">
+				<li>Frontend development on the website and platform it self</li>
+				<li>Project managemnt with team of designers, marketing and development</li>
+				<li>End to end user testing</li>
+			</ul>
 			<div class="text-sm opacity-75">
 				<span class="inline-block bg-white/10 px-3 py-1 mr-2">Project Management</span>
 				<span class="inline-block bg-white/10 px-3 py-1 mr-2">Web Development</span>
-				<span class="inline-block bg-white/10 px-3 py-1">Problem Solving</span>
+				<span class="inline-block bg-white/10 px-3 py-1 mr-2">Problem Solving</span>
 			</div>
 		</div>
 		<div class="space-y-4">
@@ -60,15 +62,15 @@
 				<h3>role: Full-Stack Developer + Creative Advisor</h3>
 				<h3>link: <a href="https://domoreforwater.org/" target="_blank">domoreforwater.org</a></h3>
 			</div>
-			<p>
-				Do More for Water is an initiative focused on creating positive impact on global and local
-				water challenges through interdisciplinary research and collaboration with leading
-				universities and partners.
-			</p>
+			<ul class="list-disc pl-6">
+				<li>Building a CMS system that for researchers and team memebers with relation database</li>
+				<li>Full stack development on the platform it self</li>
+			</ul>
 			<div class="text-sm opacity-75">
 				<span class="inline-block bg-white/10 px-3 py-1 mr-2">Project Management</span>
 				<span class="inline-block bg-white/10 px-3 py-1 mr-2">Web Development</span>
-				<span class="inline-block bg-white/10 px-3 py-1">Problem Solving</span>
+				<span class="inline-block bg-white/10 px-3 py-1 mr-2">Problem Solving</span>
+				<span class="inline-block bg-white/10 px-3 py-1">CMS</span>
 			</div>
 		</div>
 		<div class="space-y-4">
@@ -77,15 +79,36 @@
 				<h3>role: Founder + Full-Stack Developer</h3>
 				<h3>link: <a href="https://subcleaner.com/" target="_blank">subcleaner.com</a></h3>
 			</div>
-			<p>
-				Unsubscribe from subreddits you no longer follow with ease. Take control of your Reddit
-				experience in just a few clicks.
-			</p>
+			<ul class="list-disc pl-6">
+				<li>SEO optimilization for AI agents</li>
+				<li>Full stack development with reddit API and user friendly interface</li>
+				<li>Analytics of current user usage and improving the app based on user feedback</li>
+			</ul>
 			<div class="text-sm opacity-75">
 				<span class="inline-block bg-white/10 px-3 py-1 mr-2">Svelte</span>
 				<span class="inline-block bg-white/10 px-3 py-1 mr-2">TypeScript</span>
 				<span class="inline-block bg-white/10 px-3 py-1 mr-2">Reddit API</span>
 				<span class="inline-block bg-white/10 px-3 py-1">SEO</span>
+			</div>
+		</div>
+		<div class="space-y-4">
+			<h2>Calendar Filter App</h2>
+			<div>
+				<h3>role: Founder + Full-Stack Developer</h3>
+				<h3>link: <a href="https://www.lukaspesek.com/" target="_blank">lukaspesek.com</a></h3>
+			</div>
+			<ul class="list-disc pl-6">
+				<li>
+					Managing over 100 calendars with full backend and API requests on hourly basis for over a
+					year
+				</li>
+				<li>Creating filtering algorithms and data processing</li>
+				<li>Easy to use and user friendly interface</li>
+			</ul>
+			<div class="text-sm opacity-75">
+				<span class="inline-block bg-white/10 px-3 py-1 mr-2">Svelte</span>
+				<span class="inline-block bg-white/10 px-3 py-1 mr-2">TypeScript</span>
+				<span class="inline-block bg-white/10 px-3 py-1 mr-2">Calendar API</span>
 			</div>
 		</div>
 	</div>
