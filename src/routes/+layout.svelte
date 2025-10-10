@@ -42,7 +42,6 @@
 
 	main {
 		background: rgb(13, 19, 32);
-		background: linear-gradient(180deg, rgba(13, 19, 32, 1) 0%, rgba(8, 12, 21, 1) 100%);
 		color: white;
 		font-family: 'Titillium Web', BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 	}

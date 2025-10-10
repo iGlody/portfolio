@@ -3,8 +3,11 @@
 </script>
 
 <!-- Hero Section -->
-<section id="hero" class="min-h-screen grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-	<div class="h-96 lg:h-[500px] w-full">
+<section
+	id="hero"
+	class="min-h-[400px] md:min-h-screen grid grid-cols-1 lg:grid-cols-2 gap-8 items-center"
+>
+	<div class="h-80 lg:h-[500px] w-full">
 		<App />
 	</div>
 	<div class="flex flex-col justify-center space-y-4">

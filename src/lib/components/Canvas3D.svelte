@@ -41,7 +41,7 @@
 		const scrollProgress = Math.min(scrollY / maxScroll, 1);
 
 		// Rotate from 0 to 90 degrees (π/2 radians) based on scroll - less sensitive
-		scrollRotationX = scrollProgress * Math.PI * 0.2;
+		scrollRotationX = scrollProgress * Math.PI * -0.6;
 	}
 
 	onMount(() => {
