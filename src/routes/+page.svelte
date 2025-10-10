@@ -50,10 +50,10 @@
 				<li>Project management with team of designers, marketing and development</li>
 				<li>End to end user testing</li>
 			</ul>
-			<div class="text-sm opacity-75">
-				<span class="inline-block bg-white/10 px-3 py-1 mr-2">Project Management</span>
-				<span class="inline-block bg-white/10 px-3 py-1 mr-2">Web Development</span>
-				<span class="inline-block bg-white/10 px-3 py-1 mr-2">Problem Solving</span>
+			<div class="flex flex-wrap gap-2 text-sm opacity-75">
+				<span class="inline-block bg-white/10 px-3 py-1">Project Management</span>
+				<span class="inline-block bg-white/10 px-3 py-1">Web Development</span>
+				<span class="inline-block bg-white/10 px-3 py-1">Problem Solving</span>
 			</div>
 		</div>
 		<div class="space-y-4">
@@ -66,10 +66,10 @@
 				<li>Building a CMS system for researchers and team members with relational database</li>
 				<li>Full stack development on the platform it self</li>
 			</ul>
-			<div class="text-sm opacity-75">
-				<span class="inline-block bg-white/10 px-3 py-1 mr-2">Project Management</span>
-				<span class="inline-block bg-white/10 px-3 py-1 mr-2">Web Development</span>
-				<span class="inline-block bg-white/10 px-3 py-1 mr-2">Problem Solving</span>
+			<div class="flex flex-wrap gap-2 text-sm opacity-75">
+				<span class="inline-block bg-white/10 px-3 py-1">Project Management</span>
+				<span class="inline-block bg-white/10 px-3 py-1">Web Development</span>
+				<span class="inline-block bg-white/10 px-3 py-1">Problem Solving</span>
 				<span class="inline-block bg-white/10 px-3 py-1">CMS</span>
 			</div>
 		</div>
@@ -84,10 +84,10 @@
 				<li>Full stack development with reddit API and user friendly interface</li>
 				<li>Analytics of current user usage and improving the app based on user feedback</li>
 			</ul>
-			<div class="text-sm opacity-75">
-				<span class="inline-block bg-white/10 px-3 py-1 mr-2">Svelte</span>
-				<span class="inline-block bg-white/10 px-3 py-1 mr-2">TypeScript</span>
-				<span class="inline-block bg-white/10 px-3 py-1 mr-2">Reddit API</span>
+			<div class="flex flex-wrap gap-2 text-sm opacity-75">
+				<span class="inline-block bg-white/10 px-3 py-1">Svelte</span>
+				<span class="inline-block bg-white/10 px-3 py-1">TypeScript</span>
+				<span class="inline-block bg-white/10 px-3 py-1">Reddit API</span>
 				<span class="inline-block bg-white/10 px-3 py-1">SEO</span>
 			</div>
 		</div>
@@ -105,10 +105,10 @@
 				<li>Creating filtering algorithms and data processing</li>
 				<li>Easy to use and user friendly interface</li>
 			</ul>
-			<div class="text-sm opacity-75">
-				<span class="inline-block bg-white/10 px-3 py-1 mr-2">Svelte</span>
-				<span class="inline-block bg-white/10 px-3 py-1 mr-2">TypeScript</span>
-				<span class="inline-block bg-white/10 px-3 py-1 mr-2">Calendar API</span>
+			<div class="flex flex-wrap gap-2 text-sm opacity-75">
+				<span class="inline-block bg-white/10 px-3 py-1">Svelte</span>
+				<span class="inline-block bg-white/10 px-3 py-1">TypeScript</span>
+				<span class="inline-block bg-white/10 px-3 py-1">Calendar API</span>
 			</div>
 		</div>
 	</div>
