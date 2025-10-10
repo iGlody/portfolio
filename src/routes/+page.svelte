@@ -275,7 +275,7 @@
 	<div class="text-center space-y-6">
 		<h1>Let's Connect</h1>
 		<p class="text-xl opacity-90 max-w-2xl mx-auto">
-			Do you have a project in mind? I would like to hear it out! hit me up
+			Do you have a project in mind? I would like to hear it out!
 		</p>
 		<div class="flex flex-col sm:flex-row gap-4 justify-center">
 			<a

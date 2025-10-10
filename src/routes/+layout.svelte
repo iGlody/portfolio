@@ -20,7 +20,7 @@
 		<div class="hidden gap-4 md:flex">
 			<a href="https://github.com/iGlody" target="_blank">GitHub</a>
 			<a href="https://www.linkedin.com/in/ilukaspesek/" target="_blank">LinkedIn</a>
-			<a href="https://soundcloud.com/l70ka5" target="_blank">SoundCloud</a>
+			<a href="https://soundcloud.com/l70ka5" class="hidden" target="_blank">SoundCloud</a>
 		</div>
 	</nav>
 </div>
