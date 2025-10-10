@@ -11,7 +11,7 @@
 		<h1>Lukáš Pešek</h1>
 		<p class="text-xl opacity-90">Full Stack Developer + Creative Technologist</p>
 		<p class="text-lg opacity-75 max-w-md">
-			Building Full stack web aplications and creative solutions for the web with over 5 years of
+			Building Full stack web applications and creative solutions for the web with over 5 years of
 			experience.
 		</p>
 		<div class="flex justify-end">
@@ -47,7 +47,7 @@
 			</div>
 			<ul class="list-disc pl-6">
 				<li>Frontend development on the website and platform it self</li>
-				<li>Project managemnt with team of designers, marketing and development</li>
+				<li>Project management with team of designers, marketing and development</li>
 				<li>End to end user testing</li>
 			</ul>
 			<div class="text-sm opacity-75">
@@ -63,7 +63,7 @@
 				<h3>link: <a href="https://domoreforwater.org/" target="_blank">domoreforwater.org</a></h3>
 			</div>
 			<ul class="list-disc pl-6">
-				<li>Building a CMS system that for researchers and team memebers with relation database</li>
+				<li>Building a CMS system for researchers and team members with relational database</li>
 				<li>Full stack development on the platform it self</li>
 			</ul>
 			<div class="text-sm opacity-75">
@@ -80,7 +80,7 @@
 				<h3>link: <a href="https://subcleaner.com/" target="_blank">subcleaner.com</a></h3>
 			</div>
 			<ul class="list-disc pl-6">
-				<li>SEO optimilization for AI agents</li>
+				<li>SEO optimization for AI agents</li>
 				<li>Full stack development with reddit API and user friendly interface</li>
 				<li>Analytics of current user usage and improving the app based on user feedback</li>
 			</ul>
